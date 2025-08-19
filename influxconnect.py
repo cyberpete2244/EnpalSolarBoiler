@@ -21,7 +21,8 @@ class QueryLib:
       |> filter(fn: (r) => r["_measurement"] == "battery")\
       |> filter(fn: (r) => r["_field"] == "Energy.Battery.Charge.Level")\
       |> filter(fn: (r) => r["unit"] == "Percent")\
-      |> min()'
+      |> distinct()\
+      |> yield(name: "distinct")'
 
 
 querylib = QueryLib()
