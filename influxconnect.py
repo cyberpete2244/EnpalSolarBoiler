@@ -1,8 +1,8 @@
 import influxdb_client
-import usr.settings
+import settings
 
 
-mysettings = usr.settings.Settings()
+mysettings = settings.Settings()
 
 
 client = influxdb_client.InfluxDBClient(
