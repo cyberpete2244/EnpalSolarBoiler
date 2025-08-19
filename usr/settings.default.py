@@ -5,6 +5,3 @@ class Settings:
     INFLUXDB_USER = ""
     INFLUXDB_PASSWORD = ""
     INFLUXDB_TOKEN = ""
-
-
-mysettings = Settings()
