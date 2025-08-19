@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
-import time
 import RPi.GPIO as GPIO
+from influxconnect import querylib, queryinfluxdb
 
 pin1 = 32  # Relais Pins Nummer
 pin2 = 16
@@ -15,12 +15,19 @@ GPIO.output(pin2, 1)
 
 app = Flask(__name__)  # Flask Server einrichten
 
+def getFirstValue(array):
+    try:
+        return array[0][1]
+    except:
+        return None
+
 
 # Rückgabe der Seite index.html wenn die IP-Adresse ausgewählt ist
 
-@app.route('/')
+@app.route('/<charge>')
 def index():
-    return render_template('index.html')
+    result = queryinfluxdb(querylib.BATTERY_CHARGE)
+    return render_template('index.html', charge=getFirstValue(result))
 
 
 # Jeder HTML-Taster ergibt einen Nummer zurück
@@ -30,7 +37,7 @@ def reroute(changepin):
     changePin = int(changepin)  # cast changepin to an int
 
     if changePin == 1:
-        print("Boiler")  # Relais1 AN
+        print("Boiler AN")  # Relais1 AN
         GPIO.output(pin1, 0)  # Low-Pegel
 
     elif changePin == 2:
@@ -38,7 +45,7 @@ def reroute(changepin):
         GPIO.output(pin2, 0)
 
     else:
-        print("Off")  # Alle Relais AUS
+        print("Boiler AUS")  # Alle Relais AUS
         GPIO.output(pin1, 1)
         GPIO.output(pin2, 1)
 
