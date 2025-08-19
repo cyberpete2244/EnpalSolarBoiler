@@ -24,7 +24,7 @@ def getFirstValue(array):
 
 # Rückgabe der Seite index.html wenn die IP-Adresse ausgewählt ist
 
-@app.route('/<charge>')
+@app.route('/')
 def index():
     result = queryinfluxdb(querylib.BATTERY_CHARGE)
     return render_template('index.html', charge=getFirstValue(result))
