@@ -1,4 +1,4 @@
-from time import gmtime, strftime
+from time import localtime, strftime
 
 from flask import Flask, render_template, request, redirect, url_for, make_response
 import RPi.GPIO as GPIO
@@ -29,7 +29,7 @@ def getFirstValue(array):
 @app.route('/')
 def index():
     result = queryinfluxdb(querylib.BATTERY_CHARGE)
-    return render_template('index.html', charge=getFirstValue(result), timenow=strftime("%d.%m.%Y %H:%M:%S", gmtime()))
+    return render_template('index.html', charge=getFirstValue(result), timenow=strftime("%d.%m.%Y %H:%M:%S", localtime()))
 
 
 # Jeder HTML-Taster ergibt einen Nummer zurück
