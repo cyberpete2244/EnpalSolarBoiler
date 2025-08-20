@@ -1,3 +1,5 @@
+from time import gmtime, strftime
+
 from flask import Flask, render_template, request, redirect, url_for, make_response
 import RPi.GPIO as GPIO
 from influxconnect import querylib, queryinfluxdb
@@ -27,7 +29,7 @@ def getFirstValue(array):
 @app.route('/')
 def index():
     result = queryinfluxdb(querylib.BATTERY_CHARGE)
-    return render_template('index.html', charge=getFirstValue(result))
+    return render_template('index.html', charge=getFirstValue(result), timenow=strftime("%d.%m.%Y %H:%M:%S", gmtime()))
 
 
 # Jeder HTML-Taster ergibt einen Nummer zurück
