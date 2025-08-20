@@ -67,4 +67,5 @@ def reroute(changepin):
     return (response)
 
 
-app.run(debug=True, host='0.0.0.0', port=8000)  # Einrichten des Servers im Debug-Modus für Port 8000
+if __name__ == "__main__":
+    app.run(debug=False, host='0.0.0.0', port=80)  # Einrichten des Servers für Port 80
