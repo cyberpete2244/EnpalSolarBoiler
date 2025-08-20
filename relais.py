@@ -15,6 +15,8 @@ GPIO.setup(pin2, GPIO.OUT)
 GPIO.output(pin1, 1)
 GPIO.output(pin2, 1)
 
+boilersignal = False
+
 app = Flask(__name__)  # Flask Server einrichten
 
 def getFirstValue(array):
@@ -29,7 +31,16 @@ def getFirstValue(array):
 @app.route('/')
 def index():
     result = queryinfluxdb(querylib.BATTERY_CHARGE)
-    return render_template('index.html', charge=getFirstValue(result), timenow=strftime("%d.%m.%Y %H:%M:%S", localtime()))
+    curcharge = getFirstValue(result)
+    if boilersignal:
+        boilerstatusstring = "ON"
+    else:
+        boilerstatusstring = "OFF"
+
+    return render_template('index.html',
+                           charge=curcharge+" %",
+                           timenow=strftime("%d.%m.%Y %H:%M:%S", localtime()),
+                           boilerstatus=boilerstatusstring)
 
 
 # Jeder HTML-Taster ergibt einen Nummer zurück

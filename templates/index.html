@@ -21,16 +21,23 @@
     <tr>
     <tr style="text-align:center; height:50px;">
         <td colspan="2">
-            <h5 style="text-align: center; color:Green">
+            <h4 style="text-align: center; color:Green">
                 Current Battery Charge: {{charge}}
-            </h5>
+            </h4>
         </td>
     <tr>
     <tr style="text-align:center; height:50px;">
         <td colspan="2">
-            <h5 style="text-align: center; color:Blue">
+            <h4 style="text-align: center; color:Blue">
                 Current Time: {{timenow}}
-            </h5>
+            </h4>
+        </td>
+    <tr>
+    <tr style="text-align:center; height:50px;">
+        <td colspan="2">
+            <h4 style="text-align: center; color:Tomato">
+                Boiler Signal Status: {{boilerstatus}}
+            </h4>
         </td>
     <tr>
     <tr>
@@ -40,7 +47,7 @@
                 </br>
             </form>
         </td>
-        <td>
+        <td style="text-align: center">
             <form action="/5" method="POST">
                 <button class="rel" id="5">Boiler AUS</button>
                 </br>
