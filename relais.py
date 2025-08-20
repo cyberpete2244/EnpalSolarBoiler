@@ -38,7 +38,7 @@ def index():
         boilerstatusstring = "OFF"
 
     return render_template('index.html',
-                           charge=curcharge+" %",
+                           charge=f"{curcharge} %",
                            timenow=strftime("%d.%m.%Y %H:%M:%S", localtime()),
                            boilerstatus=boilerstatusstring)
 
